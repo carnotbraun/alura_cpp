@@ -65,6 +65,11 @@ int main()
 
     cout << "Voce acertou o numero secreto em: " << tentativas << " tentativas" << endl;
 
+    // Adiciona a precisao de duas casas com a funcao precision
+    cout.precision(2);
+    // Vai utilizar um marcado para manter a virgular fixa em um lugar, e para garantir que o número não aparecerá em notação científica.
+    cout << fixed;
+
     cout << "Sua pontuacao foi de " << pontos << " pontos" << endl;
 
 }
