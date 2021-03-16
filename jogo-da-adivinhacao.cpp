@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -11,7 +13,37 @@ int main()
 
     cout << "***************************************" << endl;
 
-    const int NUMERO_SECRETO = 42;
+    cout << "Escolha seu nivel de dificuldade: " << endl;
+
+    cout << "Facil (F), Medio(M) ou Dificil (D)" << endl;
+
+    char dificuldade;
+
+    cin >> dificuldade; 
+
+    int numero_de_tentativas;
+
+    if(dificuldade == 'F')
+    {
+        numero_de_tentativas = 15;
+    }
+
+    else if(dificuldade == 'M')
+    {
+        numero_de_tentativas = 10;
+    }
+
+    else
+    {
+        numero_de_tentativas = 5;
+    }
+
+    //setar uma semente para o gerador de número funcionar
+    srand(time(NULL));
+    //Visto que não é entre 0 e 99, temos que resolver nosso código com o resto "100"
+    // Utilizamos a funcao random para gerar um valor aleatorio, faz parte de uma biblioteca de funcoes padroes em C
+    const int NUMERO_SECRETO = rand() % 100;    
+    // lembrando que a funcao sempre possui () apos ela
 
     bool nao_acertou = true;
 
@@ -19,10 +51,8 @@ int main()
 
     double pontos =  1000.0;
 
-    while(nao_acertou)
+    for(tentativas = 1; tentativas <= numero_de_tentativas; tentativas++)
     {
-    
-    tentativas++;
 
     int chute;
 
@@ -49,6 +79,8 @@ int main()
         cout << "Parabens !! Voce acertou o numero secreto! " << endl;
 
         nao_acertou = false;
+        // para terminar o laço de repetição apos acertar
+        break;
     }
     else if(maior)
     {
@@ -63,13 +95,20 @@ int main()
     
     cout << "Fim de jogo!" << endl;
 
-    cout << "Voce acertou o numero secreto em: " << tentativas << " tentativas" << endl;
+    if(nao_acertou)
+    {
+        cout << "Voce perdeu! Seu numero secreto era " << NUMERO_SECRETO << ".Tente novamente!" << endl;
+    }
+    else
+    {
+        cout << "Voce acertou o numero secreto em: " << tentativas << " tentativas" << endl;
 
-    // Adiciona a precisao de duas casas com a funcao precision
-    cout.precision(2);
-    // Vai utilizar um marcado para manter a virgular fixa em um lugar, e para garantir que o número não aparecerá em notação científica.
-    cout << fixed;
+        // Adiciona a precisao de duas casas com a funcao precision
+        cout.precision(2);
+        // Vai utilizar um marcado para manter a virgular fixa em um lugar, e para garantir que o número não aparecerá em notação científica.
+        cout << fixed;
 
-    cout << "Sua pontuacao foi de " << pontos << " pontos" << endl;
+        cout << "Sua pontuacao foi de " << pontos << " pontos" << endl;
+    }
 
 }
